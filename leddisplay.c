@@ -87,9 +87,12 @@ void doStep(unsigned int pattern) {
     }
 }
 
+
+
+
 void setLEDs(unsigned int pattern) {
     ST_CP_low();
-    
+    SH_CP_low();
     int i;
     for (i = 0; i < 16; i++) {
         if (CHECK_BIT(pattern, i))
@@ -100,6 +103,7 @@ void setLEDs(unsigned int pattern) {
         SH_CP_high();
         SH_CP_low();
     }
-    SH_CP_low();
     ST_CP_high();
 }
+
+
