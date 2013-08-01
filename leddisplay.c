@@ -51,44 +51,40 @@ int main(int argc, char** argv) {
 }
 
 void selfTest() {
-    iterateAllDigits(DIG1);
-    iterateAllDigits(DIG2);
-    iterateAllDigits(DIG3);
-    iterateAllDigits(DIG4);
+    iterateAllDigits(0x0003);
+    iterateAllDigits(0x009F);
+    iterateAllDigits(0x0025);
+    iterateAllDigits(0x000D);
+
+    iterateAllDigits(0x0099);
+    iterateAllDigits(0x0049);
+    iterateAllDigits(0x00C1);
+    iterateAllDigits(0x001F);
+
+    iterateAllDigits(0x0001);
+    iterateAllDigits(0x0019);
+    iterateAllDigits(0x00FE);
+    iterateAllDigits(0x0000);
+    iterateAllDigits(0x0000);
 }
 
-void iterateAllDigits(unsigned int digit) {
-    doStep(digit | 0x0003);
-    doStep(digit | 0x009F);
-    doStep(digit | 0x0025);
-    doStep(digit | 0x000D);
-
-    doStep(digit | 0x0099);
-    doStep(digit | 0x0049);
-    doStep(digit | 0x00C1);
-    doStep(digit | 0x001F);
-
-    doStep(digit | 0x0001);
-    doStep(digit | 0x0019);
-    doStep(digit | 0x00FE);
-    doStep(digit | 0x0000);
-    doStep(digit | 0x0000);
-    doStep(0x0800);
-    doStep(0x0800);
-    doStep(0x0200);
-    doStep(0x0200);
+void iterateAllDigits(unsigned int pattern) {
+    while (TMR1 < DELAY) {
+        doStep(DIG1 | pattern);
+        doStep(DIG2 | pattern);
+        doStep(DIG3 | pattern);
+        doStep(DIG4 | pattern);
+        doStep(0x0800);
+        doStep(0x0200);
+    }
 
 }
 
 void doStep(unsigned int pattern) {
     TMR1 = 0;
     setLEDs(pattern);
-    while (TMR1 < DELAY) {
-    }
+
 }
-
-
-
 
 void setLEDs(unsigned int pattern) {
     ST_CP_low();
